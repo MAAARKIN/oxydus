@@ -1,23 +1,28 @@
 import Delivery from '../../service/delivery'
-import axios from 'axios'
 
 const state = {
-  res: {}
+  res: {},
+  url: '',
+  verb: '',
+  body: {}
 }
 
 // sao sincronos
 const mutations = {
-  DECREMENT_MAIN_COUNTER (state) {
-    state.main--
-  },
-  INCREMENT_MAIN_COUNTER (state) {
-    state.main++
-  }, 
   CLEAR_RES (state) {
     state.res = {}
   },
   POPULATE_RES (state, payload) {
     state.res = payload
+  },
+  POPULATE_BODY (state, payload) {
+    state.body = payload
+  }, 
+  POPULATE_VERB (state, verb) {
+    state.verb = verb
+  },
+  POPULATE_URL (state, url) {
+    state.url = url
   }
 }
 

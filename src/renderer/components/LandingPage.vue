@@ -1,31 +1,7 @@
 <template>
 	<div class="container-fluid" style="background-color: #f0f0f0">
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand" href="#">Fixed navbar</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link disabled" href="#">Disabled</a>
-					</li>
-				</ul>
-				<form class="form-inline mt-2 mt-md-0">
-					<input class="form-control mr-sm-2" type="text" placeholder="Maybe..." aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Maybe...</button>
-				</form>
-			</div>
-		</nav>
-		<section class="ui-lay-l bg-dark" style="padding: 10px 20px 0 20px;">
-			<p>historico</p>
-		</section>
+		<navbar></navbar>
+		<history></history>
 		<main class="max-height content-view" style="left: 280px; padding: 10px 20px 0 20px;">
 			<div class="row max-height">
 				<div class="col">
@@ -50,7 +26,6 @@
 							</div>
 						</div>
 					</div>
-					<img id="logo" src="~@/assets/logo.png" alt="electron-vue">
 					<div class="row" style="margin-bottom: 1rem;">
 						<div class="col">
 							<div class="border border-secondary rounded" style="min-height: 200px; padding: 10px;">
@@ -60,14 +35,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col">
-							<div class="border border-secondary rounded" style="min-height: 200px; padding: 10px;">
-								<h5 class="text-secondary">Corpo do Response Body</h5>
-								<span>{{resBody}}</span>
-							</div>
-						</div>
-					</div>
+					<response :resBody="resBody"></response>
+					
 				</div>
 			</div>
 		</main>
@@ -77,10 +46,13 @@
 
 <script>
 	import SystemInformation from './LandingPage/SystemInformation'
+	import Navbar from './LandingPage/Navbar'
+	import History from './LandingPage/History'
+	import Response from './LandingPage/Response'
 
 	export default {
 		name: 'landing-page',
-		components: { SystemInformation },
+		components: { SystemInformation, Navbar, History, Response},
 		methods: {
 			open (link) {
 				this.$electron.shell.openExternal(link)
