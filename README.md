@@ -1,4 +1,4 @@
-# oxente-client
+# oXydus REST Client
 
 > Simple Rest Client 
 
