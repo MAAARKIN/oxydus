@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>oXydus REST Client</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+
     <% if (htmlWebpackPlugin.options.nodeModules) { %>
       <!-- Add `node_modules/` to global paths so `require` works properly in development -->
       <script>
@@ -18,6 +19,7 @@
       if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
     </script>
 
+    <script src="static/vendors/ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
     <!-- webpack builds are automatically injected -->
   </body>
 </html>

@@ -2,9 +2,12 @@ import Delivery from '../../service/delivery'
 
 const state = {
   res: {},
-  url: '',
-  verb: '',
-  body: {}
+  request: {
+    verb: '',
+    url: '',
+    headers: {},
+    body: ''
+  }
 }
 
 // sao sincronos
@@ -15,28 +18,24 @@ const mutations = {
   POPULATE_RES (state, payload) {
     state.res = payload
   },
-  POPULATE_BODY (state, payload) {
-    state.body = payload
+  POPULATE_BODY (state, body) {
+    state.request.body = body
   }, 
   POPULATE_VERB (state, verb) {
-    state.verb = verb
+    state.request.verb = verb
   },
   POPULATE_URL (state, url) {
-    state.url = url
+    state.request.url = url
   }
 }
 
 // sao assincronos
 const actions = {
-  someAsyncTask ({ commit }) {
-    // do something async
-    commit('INCREMENT_MAIN_COUNTER')
-  },
-
-  async sendToServer ({commit}, payload) {
+  async sendToServer ({commit, state}, ) {
     commit('CLEAR_RES')
     console.log('send to server called')
-    const response = await Delivery.send(payload.verb, payload.url, payload.body);
+    // const response = await Delivery.send(payload.verb, payload.url, payload.body);
+    const response = await Delivery.send(state.request)
     console.log(response)
     commit('POPULATE_RES', response)
   }

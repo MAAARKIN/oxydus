@@ -5,36 +5,7 @@
 		<main class="max-height content-view" style="left: 280px; padding: 10px 20px 0 20px;">
 			<div class="row max-height">
 				<div class="col">
-					<div class="form-group">
-						<small id="urlHelp" class="form-text text-muted">Request</small>
-						<div class="form-row">
-							<div class="col">
-								<input type="text" v-model="url" class="form-control" id="exampleInputEmail1" aria-describedby="urlHelp" placeholder="http://your-url:PORT/api/example">
-							</div>
-
-							<div class="col-2">
-								<select class="custom-select" style="width: 200px;" v-model="verb">
-									<option value="POST">POST</option>
-									<option value="GET">GET</option>
-									<option value="PUT">PUT</option>
-									<option value="DELETE">DELETE</option>
-								</select>
-							</div>
-
-							<div>
-								<button @click.prevent="send" type="button" class="btn btn-primary">Enviar</button>
-							</div>
-						</div>
-					</div>
-					<div class="row" style="margin-bottom: 1rem;">
-						<div class="col">
-							<div class="border border-secondary rounded" style="min-height: 200px; padding: 10px;">
-								<h5 class="text-secondary">Corpo do Request Body</h5>
-
-								<span>Selecionado: {{ verb }}</span>
-							</div>
-						</div>
-					</div>
+					<request></request>
 					<response :resBody="resBody"></response>
 					
 				</div>
@@ -49,15 +20,12 @@
 	import Navbar from './LandingPage/Navbar'
 	import History from './LandingPage/History'
 	import Response from './LandingPage/Response'
+	import Request from './LandingPage/Request'
 
 	export default {
 		name: 'landing-page',
-		components: { SystemInformation, Navbar, History, Response},
+		components: { SystemInformation, Navbar, History, Response, Request},
 		methods: {
-			open (link) {
-				this.$electron.shell.openExternal(link)
-			},
-
 			send () {
 				this.$store.dispatch('sendToServer', {verb: this.verb, url: this.url})
 			}

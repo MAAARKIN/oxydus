@@ -1,14 +1,14 @@
 // import {HTTP} from '../helper/http-common'
 import HTTP from 'axios'
 
-function send(verb, url, payload) {
+function send(request) {
 	console.log("Send called")
-	if (verb === 'POST') {
+	if (request.verb === 'POST') {
 		console.log("POST")
-		post(url, payload)
-	} else if (verb ==='GET') {
+		post(request.url, request.payload)
+	} else if (request.verb ==='GET') {
 		console.log("GET")
-		return get(url)
+		return get(request.url)
 	}
 }
 
