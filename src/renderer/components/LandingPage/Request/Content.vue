@@ -5,11 +5,10 @@
 				<h5 class="text-secondary">Corpo do Request Body</h5>
 
 				<div class="row">
-					<div class="col-6">esquerda</div>
-					<div class="col-6" style="min-height: 200px; padding: 10px;">
-						<div id="editor">function foo() {}</div>
+					<div class="col-4">headers</div>
+					<div class="col" style="min-height: 200px; padding: 10px;">
+						<div id="editor" class="rounded">function foo() {}</div>
 					</div>
-					
 				</div>
 		</div>
 	</div>
@@ -36,9 +35,10 @@
 			}
 		},
 		mounted: function() {
-			let editor = ace.edit("editor");
-			editor.setTheme("ace/theme/monokai");
-			editor.getSession().setMode("ace/mode/javascript");
+			let editor = ace.edit("editor")
+			editor.setTheme("ace/theme/monokai")
+			editor.getSession().setMode("ace/mode/javascript")
+			editor.setOption("showPrintMargin", false)
 		}
 	}
 </script>
@@ -47,7 +47,7 @@
 	#editor { 
 		position: absolute;
 		top: 0;
-		right: 0;
+		right: 20px;
 		bottom: 0;
 		left: 0;
 	}

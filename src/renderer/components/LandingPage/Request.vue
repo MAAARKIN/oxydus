@@ -22,9 +22,9 @@
 			</div>
 		</div>
 
-		Selecionado: {{ verb }}
+		verb: {{ verb }}
 		<br/>
-		Selecionado: {{ body }}
+		output request body: {{ body }}
 
 		<content-body :value="body"></content-body>
 	</div>

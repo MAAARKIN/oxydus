@@ -3,7 +3,7 @@
 		<navbar></navbar>
 		<history></history>
 		<main class="max-height content-view" style="left: 280px; padding: 10px 20px 0 20px;">
-			<div class="row max-height">
+			<div class="row" style="margin-bottom: 80px;">
 				<div class="col">
 					<request></request>
 					<response :resBody="resBody"></response>
@@ -25,20 +25,11 @@
 	export default {
 		name: 'landing-page',
 		components: { SystemInformation, Navbar, History, Response, Request},
-		methods: {
-			send () {
-				this.$store.dispatch('sendToServer', {verb: this.verb, url: this.url})
-			}
-		},
-		data() {
-			return {
-				verb: 'POST',
-				url: ''
-			}
-		},
 		computed: {
 			resBody: function() {
-				return this.$store.state.Consumer.res
+				// let teste = this.$store.state.Consumer.response.data
+				// return teste
+				return this.$store.state.Consumer.response.data
 			}
 		}
 	}
