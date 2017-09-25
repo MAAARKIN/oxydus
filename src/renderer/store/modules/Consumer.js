@@ -6,13 +6,15 @@ const state = {
 		verb: '',
 		url: '',
 		headers: {},
-		body: ''
+		body: '',
+		type: ''
 	},
 	response: {
 		status: 0,
 		statusText: '',
 		data: {},
-		headers: {}
+		headers: {},
+		type: ''
 	}
 }
 
@@ -45,31 +47,43 @@ const mutations = {
 		if (data) {
 			state.response.data = data
 		}
+	},
+	POPULATE_RESPONSE_TYPE(state, data) {
+		if (data) {
+			state.response.type = data;
+		}
 	}
 }
 
 // sao assincronos
 const actions = {
-	async sendToServer ({commit, state}, ) {
+	async sendToServer ({commit, state}) {
 		commit('CLEAR_RES')
 		console.log('send to server called')
-    // const response = await Delivery.send(payload.verb, payload.url, payload.body);
-    const response = await Delivery.send(state.request)
-    console.log(response)
-    commit('POPULATE_RESPONSE', response)
-    commit('POPULATE_RES', response)
-    
+		// const response = await Delivery.send(payload.verb, payload.url, payload.body);
+		const response = await Delivery.send(state.request)
+		console.log(response)
+		commit('POPULATE_RESPONSE', response)
+		commit('POPULATE_RES', response)
+		
+		let headers = state.response.headers
+		let contentType = 'text'
+		let data = state.response.data
 
-    let headers = state.response.headers
-    if (headers['content-type'] && headers['content-type'].includes('json')) {
-    	let data = state.response.data
-    	// console.log(data)
-    	let pretty = JSON.stringify(data, undefined, 4)
-    	commit('POPULATE_RESPONSE_BODY', pretty)
-    }
-    
-    console.log(state.response.data)
-  }
+		if (headers['content-type'] && headers['content-type'].includes('json')) {
+			contentType = 'json'
+			data = JSON.stringify(data, undefined, 4)
+		} else if (headers['content-type'] && headers['content-type'].includes('xml')) {
+			contentType = 'xml'
+		}
+		
+		// let pretty = JSON.stringify(data, undefined, 4)
+		commit('POPULATE_RESPONSE_BODY', data)
+		//preenchimento do tipo, utilizado para efetuar um 'pretty text' no response
+		commit('POPULATE_RESPONSE_TYPE', contentType)
+		
+		console.log(state.response.data)
+	}
 }
 
 export default {

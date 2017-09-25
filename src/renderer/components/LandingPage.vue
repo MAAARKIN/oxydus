@@ -6,7 +6,7 @@
 			<div class="row" style="margin-bottom: 80px;">
 				<div class="col">
 					<request></request>
-					<response :resBody="resBody"></response>
+					<response :resBody="resBody" :type="type"></response>
 					
 				</div>
 			</div>
@@ -30,6 +30,9 @@
 				// let teste = this.$store.state.Consumer.response.data
 				// return teste
 				return this.$store.state.Consumer.response.data
+			},
+			type: function() {
+				return this.$store.state.Consumer.response.type
 			}
 		}
 	}
