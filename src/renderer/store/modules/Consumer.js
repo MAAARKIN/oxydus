@@ -52,6 +52,11 @@ const mutations = {
 		if (data) {
 			state.response.type = data;
 		}
+	},
+	POPULATE_REQUEST_TYPE(state, data) {
+		if (data) {
+			state.request.type = data;
+		}
 	}
 }
 
@@ -61,10 +66,16 @@ const actions = {
 		commit('CLEAR_RES')
 		console.log('send to server called')
 		// const response = await Delivery.send(payload.verb, payload.url, payload.body);
+
+		if (state.request.type === 'json') {
+			let obj = JSON.parse(state.request.body)
+			let pretty = JSON.stringify(obj, undefined, 4)
+			commit('POPULATE_BODY', pretty)
+		}
+
 		const response = await Delivery.send(state.request)
 		console.log(response)
 		commit('POPULATE_RESPONSE', response)
-		commit('POPULATE_RES', response)
 		
 		let headers = state.response.headers
 		let contentType = 'text'

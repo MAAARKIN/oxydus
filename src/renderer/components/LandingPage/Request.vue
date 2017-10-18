@@ -50,6 +50,7 @@
 			send () {
 				this.$store.commit('POPULATE_VERB', this.verb)
 				this.$store.commit('POPULATE_URL', this.url)
+				this.$store.commit('POPULATE_REQUEST_TYPE', 'json')
 				this.$store.dispatch('sendToServer')
 			}
 		}

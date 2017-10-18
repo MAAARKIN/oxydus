@@ -7,7 +7,7 @@
 				<div class="row">
 					<div class="col-4">headers</div>
 					<div class="col" style="min-height: 200px; padding: 10px;">
-						<div id="editor" class="rounded">function foo() {}</div>
+						<div id="editor" class="rounded" >{{body}}</div>
 					</div>
 				</div>
 		</div>
@@ -20,9 +20,13 @@
 		props: {
 			value: {}
 		},
-		data() {
-			return {
-				body: this.value
+		computed: {
+			body: function() {
+				if (this.value) {
+					return this.value
+				} else {
+					return 'function foo() {}'
+				}
 			}
 		},
 		methods: {
@@ -35,10 +39,17 @@
 			}
 		},
 		mounted: function() {
+			let self = this
 			let editor = ace.edit("editor")
 			editor.setTheme("ace/theme/monokai")
 			editor.getSession().setMode("ace/mode/javascript")
 			editor.setOption("showPrintMargin", false)
+			editor.getSession().on("change", function(e) {
+				// self.teste()
+				console.log(editor.getSession().getValue())
+				self.$store.commit('POPULATE_BODY', editor.getSession().getValue())
+			})
+			// this.teste()
 		}
 	}
 </script>
