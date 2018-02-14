@@ -26,7 +26,7 @@
 		<br/>
 		output request body: {{ body }}
 
-		<content-body :value="body"></content-body>
+		<content-body :verb="verb" :value="body"></content-body>
 	</div>
 </template>
 

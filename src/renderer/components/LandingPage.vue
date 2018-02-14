@@ -29,6 +29,7 @@
 			resBody: function() {
 				// let teste = this.$store.state.Consumer.response.data
 				// return teste
+				console.log(this.$store.state.Consumer.response.data)
 				return this.$store.state.Consumer.response.data
 			},
 			type: function() {
@@ -76,7 +77,7 @@
 		left: 0;
 		top: 50px;
 		bottom: 0;
-		overflow: hidden;
+		overflow: auto;
 	}
 
 	.ui-lay-l p {

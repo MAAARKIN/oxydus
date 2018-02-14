@@ -6,7 +6,7 @@ const state = {
 		verb: '',
 		url: '',
 		headers: {},
-		body: '',
+		body: '{}',
 		type: ''
 	},
 	response: {

@@ -7,7 +7,7 @@
 				<div class="row">
 					<div class="col-4">headers</div>
 					<div class="col" style="min-height: 200px; padding: 10px;">
-						<div id="editor" class="rounded" >{{body}}</div>
+						<div v-show="isPostOrPut" id="editor" class="rounded" >{{body}}</div>
 					</div>
 				</div>
 		</div>
@@ -18,15 +18,19 @@
 <script>
 	export default {
 		props: {
-			value: {}
+			value: {},
+			verb: ''
 		},
 		computed: {
 			body: function() {
 				if (this.value) {
 					return this.value
 				} else {
-					return 'function foo() {}'
+					return '{}'
 				}
+			},
+			isPostOrPut: function() {
+				return (this.verb == 'POST' || this.verb == 'PUT')
 			}
 		},
 		methods: {
@@ -45,11 +49,9 @@
 			editor.getSession().setMode("ace/mode/javascript")
 			editor.setOption("showPrintMargin", false)
 			editor.getSession().on("change", function(e) {
-				// self.teste()
 				console.log(editor.getSession().getValue())
 				self.$store.commit('POPULATE_BODY', editor.getSession().getValue())
 			})
-			// this.teste()
 		}
 	}
 </script>
